@@ -101,7 +101,7 @@ class CustomAgent(Agent):
             register_done_callback=register_done_callback,
             tool_calling_method=tool_calling_method
         )
-        if self.model_name in ["deepseek-reasoner"] or "deepseek-r1" in self.model_name:
+        if self.model_name in ["deepseek-reasoner"] or "deepseek-r1" or "DeepSeek-R1" in self.model_name:
             # deepseek-reasoner does not support function calling
             self.use_deepseek_r1 = True
             # deepseek-reasoner only support 64000 context

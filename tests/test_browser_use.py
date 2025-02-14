@@ -39,7 +39,7 @@ async def test_browser_use_org():
     # )
     
     llm = utils.get_llm_model(
-        provider="ollama", model_name="deepseek-r1:14b", temperature=0.5
+        provider="deepseek", model_name="deepseek-ai/DeepSeek-R1", temperature=0.5
     )
 
     window_w, window_h = 1920, 1080
@@ -118,12 +118,20 @@ async def test_browser_use_custom():
     #     api_key=os.getenv("OPENAI_API_KEY", ""),
     # )
 
+    # llm = utils.get_llm_model(
+    #     provider="azure_openai",
+    #     model_name="gpt-4o",
+    #     temperature=0.8,
+    #     base_url=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
+    #     api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
+    # )
+
     llm = utils.get_llm_model(
-        provider="azure_openai",
-        model_name="gpt-4o",
+        provider="deepseek",
+        model_name="deepseek-ai/DeepSeek-R1",
         temperature=0.8,
-        base_url=os.getenv("AZURE_OPENAI_ENDPOINT", ""),
-        api_key=os.getenv("AZURE_OPENAI_API_KEY", ""),
+        base_url="https://api.siliconflow.cn/v1",
+        api_key="sk-pjecqgsatvtfqdmcpzymqmdjfoyzoefutldruudkjojzvlen",
     )
 
     # llm = utils.get_llm_model(

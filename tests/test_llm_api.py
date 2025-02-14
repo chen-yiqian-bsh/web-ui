@@ -53,7 +53,7 @@ def test_llm(config, query, image_path=None, system_message=None):
     if config.provider == "ollama":
         if "deepseek-r1" in config.model_name:
             from src.utils.llm import DeepSeekR1ChatOllama
-            llm = DeepSeekR1ChatOllama(model=config.model_name)
+            llm = DeepSeekR1ChatOllama(model=config.model_name, base_url="http://172.16.4.125:11434")
         else:
             llm = ChatOllama(model=config.model_name)
 
@@ -105,9 +105,13 @@ def test_deepseek_model():
     config = LLMConfig(provider="deepseek", model_name="deepseek-chat")
     test_llm(config, "Who are you?")
 
+# def test_deepseek_r1_model():
+#     config = LLMConfig(provider="deepseek", model_name="deepseek-reasoner")
+#     test_llm(config, "Which is greater, 9.11 or 9.8?", system_message="You are a helpful AI assistant.")
+
 def test_deepseek_r1_model():
-    config = LLMConfig(provider="deepseek", model_name="deepseek-reasoner")
-    test_llm(config, "Which is greater, 9.11 or 9.8?", system_message="You are a helpful AI assistant.")
+    config = LLMConfig(provider="deepseek", model_name="deepseek-ai/DeepSeek-R1", base_url="https://api.siliconflow.cn/v1", api_key="sk-pjecqgsatvtfqdmcpzymqmdjfoyzoefutldruudkjojzvlen")
+    test_llm(config, "为什么使用API调用DeepSeek时，短的Token能够成功，而长的Token常常失败", system_message="You are a helpful AI assistant.")
 
 def test_ollama_model():
     config = LLMConfig(provider="ollama", model_name="qwen2.5:7b")
@@ -115,6 +119,10 @@ def test_ollama_model():
 
 def test_deepseek_r1_ollama_model():
     config = LLMConfig(provider="ollama", model_name="deepseek-r1:14b")
+    test_llm(config, "How many 'r's are in the word 'strawberry'?")
+
+def test_deepseek_r1_ollama_7b_model():
+    config = LLMConfig(provider="ollama", model_name="deepseek-r1:7b", base_url="http://172.16.4.125:11434")
     test_llm(config, "How many 'r's are in the word 'strawberry'?")
 
 def test_mistral_model():
@@ -125,8 +133,9 @@ if __name__ == "__main__":
     # test_openai_model()
     # test_google_model()
     # test_azure_openai_model()
-    #test_deepseek_model()
+    # test_deepseek_model()
     # test_ollama_model()
     test_deepseek_r1_model()
+    # test_deepseek_r1_ollama_7b_model()
     # test_deepseek_r1_ollama_model()
     # test_mistral_model()
